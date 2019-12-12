@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { TodoservicioService } from '../servicios/todoservicio.service';
-import { ModalController, AlertController } from '@ionic/angular';
+import { NavController, NavParams,ModalController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Toast } from '../Utils/Toast';
 import { Loading } from '../Utils/Loading';
+import { ModalPage } from '../modal/modal.page';
 
 @Component({
   selector: 'app-tab2',
@@ -20,10 +21,12 @@ export class Tab2Page {
 
   constructor(private todoS:TodoservicioService, 
     private myLoading:Loading,
+    public navCtrl: NavController,
     private router:Router, 
     public myToast:Toast,
     private formBuilder: FormBuilder,
-    public alertController: AlertController) {
+    public alertController: AlertController,
+    private modalController: ModalController) {
   }
 
   
@@ -33,8 +36,23 @@ export class Tab2Page {
     console.log("Solicitada la peticion");
   }
 
-  public editaNota(id:string){
-    //this.myModal.presentModal();
+  async editaNota(id:string ,titulo:string ,descripcion:string ){
+    
+    const modal = await this.modalController.create({
+      
+      component: ModalPage,
+      componentProps: {
+        id:id, 
+        titulo:titulo, 
+        descripcion: descripcion
+      }
+     });
+     
+     modal.onWillDismiss().then(d=>{
+        console.log("Se cierra la modal.");
+        this.refrescar();
+     });
+     return await modal.present();
   }
 
 
