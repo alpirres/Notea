@@ -6,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { ModalPageRoutingModule } from './modal-routing.module';
 
-import { ModallPage } from './modal.page';
+import { ModalPage } from './modal.page';
 
 @NgModule({
   
@@ -16,6 +16,6 @@ import { ModallPage } from './modal.page';
     IonicModule,
     ModalPageRoutingModule
   ],
-  declarations: [ModallPage]
+  declarations: [ModalPage]
 })
 export class ModalPageModule {}
