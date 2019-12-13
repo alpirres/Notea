@@ -9,13 +9,13 @@ import { ModalPageRoutingModule } from './modal-routing.module';
 import { ModalPage } from './modal.page';
 
 @NgModule({
-  
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     ModalPageRoutingModule
   ],
-  declarations: [ModalPage]
+  declarations: [ModalPage],
+  exports: [ModalPage]
 })
 export class ModalPageModule {}

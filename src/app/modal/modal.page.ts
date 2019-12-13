@@ -33,9 +33,10 @@ export class ModalPage implements OnInit {
 
   ngOnInit() {
     this.todoForm=this.formBuilder.group({
-      title:['', Validators.required],
-      description:['']
+      title:[this.titulo, Validators.required],
+      description:[this.descripcion]
     })
+    
   }
 
   dismiss(){
@@ -52,15 +53,17 @@ export class ModalPage implements OnInit {
     this.todoS.updateTodo(this.id,data)
     .then((ok)=>{
       this.myToast.presentToast("Nota Editada",2000,'success');
+      this.dismiss;
     })
     .catch((err)=>{
       this.myToast.presentToast('Error Editando Nota',4000,'danger' )
     })
     .finally(()=>{
-      this.myLoading.cerrarLoading();
       this.dismiss;
+      this.myLoading.cerrarLoading();
       this.router.navigateByUrl('/tabs/tab2');
     })
   }
 
 }
+

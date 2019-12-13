@@ -5,6 +5,7 @@ import { TodoservicioService } from '../servicios/todoservicio.service';
 import { Router } from '@angular/router';
 import { Loading } from '../Utils/Loading';
 import { Toast } from '../Utils/Toast';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 
 @Component({
@@ -15,12 +16,14 @@ import { Toast } from '../Utils/Toast';
 export class Tab1Page {
 
   public todoForm:FormGroup;
+  foto: any;
 
   constructor(private formBuilder:FormBuilder, 
     private todoS:TodoservicioService, 
     private router:Router,
     public myLoading:Loading,
-    public myToast:Toast) {}
+    public myToast:Toast,
+    private camera: Camera) {}
 
   ngOnInit(){
     this.todoForm=this.formBuilder.group({
@@ -29,6 +32,11 @@ export class Tab1Page {
     })
   }
 
+  ionViewDidLeave(){
+    this.todoForm.reset();
+    this.foto='';
+  }
+  
   addNote(){
     let data:note;
     data={
@@ -40,6 +48,7 @@ export class Tab1Page {
     .then((ok)=>{
       this.myToast.presentToast("Nota Agregada",2000,'success');
       this.todoForm.reset();
+      this.foto='';
     })
     .catch((err)=>{
       this.myToast.presentToast('Error Agregando Nota',4000,'danger' )
@@ -48,6 +57,17 @@ export class Tab1Page {
       this.myLoading.cerrarLoading();
       this.router.navigateByUrl('/tabs/tab2');
     })
+  }
+
+  hacerFoto() {
+    const options: CameraOptions = {
+      destinationType: this.camera.DestinationType.DATA_URL
+    }
+    this.camera.getPicture(options).then((imageData) => {
+      this.foto = 'data:image/jpeg;base64,' + imageData;
+    }, (err) => {
+      console.log(err);
+    });
   }
 
 }

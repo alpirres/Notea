@@ -16,6 +16,8 @@
       <ion-label>Descripcion</ion-label>
       <ion-input formControlName="description"></ion-input>
     </ion-item>
+    <ion-button (click)="hacerFoto()">Hacer foto</ion-button>
+      <img [src]="foto" *ngIf="foto" />
     <ion-button shape="round" color="primary" fill="solid" type="submit" [disabled]="!this.todoForm.valid">Guardar</ion-button>
   </form>
 </ion-content>

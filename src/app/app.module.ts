@@ -14,6 +14,7 @@ import {AngularFirestoreModule} from 'angularfire2/firestore';
 import {environment} from 'src/environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalPageModule } from './modal/modal.module';
+import { Camera } from '@ionic-native/camera/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,6 +32,7 @@ import { ModalPageModule } from './modal/modal.module';
   providers: [
     StatusBar,
     SplashScreen,
+    Camera,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
